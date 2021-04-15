@@ -40,47 +40,43 @@ function clear(square){
     $(`#${square}`).html('')
 }
 
+var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
 
-var board_state =
-{
-'a1':'rl',
-'b1':'nl',
-'c1':'bl',
-'d1':'ql',
-'e1':'kl',
-'f1':'bl',
-'g1':'nl',
-'h1':'rl',
-'a2':'pl',
-'b2':'pl',
-'c2':'pl',
-'d2':'pl',
-'e2':'pl',
-'f2':'pl',
-'g2':'pl',
-'h2':'pl',
-'a7':'pd',
-'b7':'pd',
-'c7':'pd',
-'d7':'pd',
-'e7':'pd',
-'f7':'pd',
-'g7':'pd',
-'h7':'pd',
-'a8':'rd',
-'b8':'nd',
-'c8':'bd',
-'d8':'qd',
-'e8':'kd',
-'f8':'bd',
-'g8':'nd',
-'h8':'rd',
+function parse_fen(fen){
+	rank = 8;
+	file = 1;
+	for(let i=0; i<starting_fen.length; i++){
+		let character = starting_fen[i];
+		//if character represents a piece
+		if ("PRNBKQ".includes(character.toUpperCase())){
+			let file_letter = "abcdefgh"[8 - file];
+			//test if character is light or dark
+			let color = "d";
+			if (character === character.toUpperCase()){
+				//white
+				color = "l";
+			}
+
+			draw(character.toLowerCase()+color,file_letter+rank);
+
+			file += 1;
+		}
+		else if(character == "/"){
+			//move to next rank
+			rank -= 1;
+			file = 1;
+		}
+		//if character is a number
+		else if(!isNaN(parseInt(character))){
+			//skip that many spaces
+			file += parseInt(character)
+		}
+	}
 }
 
-//draw the board (this should be replaced with a FEN reader)
-for (var key in board_state){
-    draw(board_state[key],key);
-}
+parse_fen(starting_fen);
+
+
 
 //disable context menu and dragging
 $('img').on('dragstart', function(event) { event.preventDefault(); });
