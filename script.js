@@ -40,7 +40,8 @@ function clear(square){
     $(`#${square}`).html('')
 }
 
-var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+//var starting_fen = "4R3/8/8/2Pkp3/N7/4rnKB/1nb5/b1r5";
 
 function parse_fen(fen){
 	rank = 8;
@@ -49,7 +50,7 @@ function parse_fen(fen){
 		let character = starting_fen[i];
 		//if character represents a piece
 		if ("PRNBKQ".includes(character.toUpperCase())){
-			let file_letter = "abcdefgh"[8 - file];
+			let file_letter = "abcdefgh"[file-1];
 			//test if character is light or dark
 			let color = "d";
 			if (character === character.toUpperCase()){
