@@ -86,6 +86,7 @@ body{
 
 button{
     background-color: rgb(226, 226, 226);
+    box-sizing: content-box;
 }
 
 #menu_button:hover{
@@ -102,6 +103,7 @@ button{
     height: 100px;
     width: 100px;
     padding:0;
+    margin:5px;
 }
 
 .perspective_button img{
@@ -227,7 +229,7 @@ table{
     margin: auto;
     margin-top: 100px;
     width: 400px;
-    height: 650px;
+    height: 700px;
     border-radius: 10px;
     background-color: white;
     z-index: 2;
