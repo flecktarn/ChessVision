@@ -121,17 +121,19 @@ $(".square").click(function(){
 });
 
 var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-var position_fen= "4R3/8/8/2Pkp3/N7/4rnKB/1nb5/b1r5";
-var random = true;
+var blank_fen = "///////";
+var random = false;
 
 var positions = []
 //load positions
 
 
 
+parse_fen(starting_fen);
+
+
 $.get("/resources/positions.txt",function(data){
 	positions = data.split("\n");
-	parse_fen(position_fen);
-	prompt(starting_fen);
+	prompt();
 });
 
