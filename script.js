@@ -51,7 +51,6 @@ function create_board(){
 	$('#white_perspective_button').click(function(){
 		change_perspective('white');
 	})
-
 	$('#black_perspective_button').click(function(){
 		change_perspective('black');
 	})
@@ -68,6 +67,8 @@ function change_perspective(color){
 			let rank = (8-Math.floor(index/8));
 			$(this).attr('id',`${file}${rank}`);
 		});
+		$('#prompt2').css('background-color','white');
+		$('#prompt2').css('color','black');
 	}
 	else if(color == "black"){
 		$('.square').each(function(index){
@@ -75,9 +76,12 @@ function change_perspective(color){
 			let rank = Math.floor(index/8)+1;
 			$(this).attr('id',`${file}${rank}`);
 		});
+		$('#prompt2').css('background-color','black');
+		$('#prompt2').css('color','white');
 	}
 	draw_rank_and_file_labels();
 	parse_fen(current_fen);
+
 }
 
 function draw_rank_and_file_labels(){
@@ -167,7 +171,7 @@ function prompt(){
     target = file + String(rank)
     $('#prompt').html(target);
     $('#prompt2').html(target);
-    $('#prompt2').css('background-color','black');
+    $('#prompt2').removeClass('bad');
     $('#prompt').stop(true,true).show().fadeOut(1500);
 }
 
@@ -180,7 +184,7 @@ $(".square").click(function(){
         prompt()
     }
     else{
-        $('#prompt2').css('background-color','red');
+        $('#prompt2').addClass('bad');
     }
 });
 
