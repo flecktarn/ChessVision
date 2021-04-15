@@ -1,35 +1,36 @@
 var chessboard= "";
-files = 'abcdefgh'
-
-//create board elements
-for (let i=0; i<64; i++){
-        let color ='light';
-        let row = Math.floor(i/8)
-        let rank = 8-row;
-        let file = files[i%8];
-        if(row % 2 == 0 && i % 2 == 0){
-            color = 'light';
-        }
-        else if(row%2 == 0 && i%2 == 1){
-            color = 'dark'
-        }
-        else if(row%2 == 1 && i%2 == 1){
-            color = 'light';
-
-        }
-        else{
-            color = 'dark';
-        }
-        chessboard += `<div class = 'square ${color}' id = '${file}${rank}'></div>`
-}
-$("#board").html(chessboard);
-$("#board").append("<div id='prompt'></div>");
-$("#board").append("<div id='prompt2'></div>");
-
-
 var active_square = '';
+var target = 'a1';
 
+function create_board(){
+	let files = 'abcdefgh';
+	//create board elements
+	for (let i=0; i<64; i++){
+		let color ='light';
+		let row = Math.floor(i/8)
+		let rank = 8-row;
+		let file = files[i%8];
+		if(row % 2 == 0 && i % 2 == 0){
+		    color = 'light';
+		}
+		else if(row%2 == 0 && i%2 == 1){
+		    color = 'dark'
+		}
+		else if(row%2 == 1 && i%2 == 1){
+		    color = 'light';
 
+		}
+		else{
+		    color = 'dark';
+		}
+		chessboard += `<div class = 'square ${color}' id = '${file}${rank}'></div>`
+	}
+	$("#board").html(chessboard);
+	$("#board").append("<div id='prompt'></div>");
+	$("#board").append("<div id='prompt2'></div>");
+}
+
+create_board();
 
 function draw (piece,square){
     $(`#${square}`).html(`<img src='./images/Chess_${piece}t45.svg'/>`)
@@ -38,7 +39,6 @@ function draw (piece,square){
 function clear(square){
     $(`#${square}`).html('')
 }
-
 
 
 var board_state =
@@ -77,15 +77,16 @@ var board_state =
 'h8':'rd',
 }
 
+//draw the board (this should be replaced with a FEN reader)
 for (var key in board_state){
     draw(board_state[key],key);
 }
+
+//disable context menu and dragging
 $('img').on('dragstart', function(event) { event.preventDefault(); });
 $('img').on('contextmenu', function(event) { event.preventDefault(); });
 
-
-var target = 'a1';
-
+//prompt the player with a new square to find
 function prompt(){
     let random1 = Math.floor(Math.random()*8) + 1;
     let random2 = Math.floor(Math.random()*8) + 1;
@@ -103,6 +104,7 @@ function prompt(){
 prompt();
 
 
+//handler for user clicking on a square
 $(".square").click(function(){
     let square = $(this).attr('id');
     console.log('clicked:'+ square);
