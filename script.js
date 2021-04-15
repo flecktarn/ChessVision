@@ -43,7 +43,7 @@ function create_board(){
 	$("#board").html(chessboard);
 	$("#board").append("<div id='prompt'></div>");
 	$("#board").append("<div id='prompt2'></div>");
-	$("#board").append("<button id='menu_button'>menu</button>");
+	$("#board").append("<button id='menu_button'>settings</button>");
 
 	$('#white_perspective_button').click(function(){
 		change_perspective('white');

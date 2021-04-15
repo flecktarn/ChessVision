@@ -65,14 +65,17 @@ body{
     text-align: center;
     font-size: 3vh;
     font-weight: bold;
-    color: black;
-    background-color: white;
+    color: rgb(71, 71, 71);
+    background-color: transparent;
     border-radius: 1vh;
-    box-shadow: 0px 3px 5px rgb(27, 27, 27);
     border: none;
     position:absolute;
     right: 1vh;
     bottom: -7vh;
+}
+
+#menu_button:hover{
+    color:darkgrey;
 }
 
 .bad{
