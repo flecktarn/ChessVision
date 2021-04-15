@@ -40,14 +40,14 @@ function clear(square){
     $(`#${square}`).html('')
 }
 
-var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-//var starting_fen = "4R3/8/8/2Pkp3/N7/4rnKB/1nb5/b1r5";
+
 
 function parse_fen(fen){
+	clear_board();
 	rank = 8;
 	file = 1;
-	for(let i=0; i<starting_fen.length; i++){
-		let character = starting_fen[i];
+	for(let i=0; i<fen.length; i++){
+		let character = fen[i];
 		//if character represents a piece
 		if ("PRNBKQ".includes(character.toUpperCase())){
 			let file_letter = "abcdefgh"[file-1];
@@ -75,36 +75,43 @@ function parse_fen(fen){
 	}
 }
 
-parse_fen(starting_fen);
 
-
-
+//empty the board of all pieces
+function clear_board(){
+	$(".square").each(function(){
+		$(this).html("");
+	});
+}
 //disable context menu and dragging
 $('img').on('dragstart', function(event) { event.preventDefault(); });
 $('img').on('contextmenu', function(event) { event.preventDefault(); });
 
+
 //prompt the player with a new square to find
 function prompt(){
+	if (random){
+		let index = Math.floor(Math.random() * positions.length);
+		position = positions[index];
+		parse_fen(position);
+	}
+
     let random1 = Math.floor(Math.random()*8) + 1;
     let random2 = Math.floor(Math.random()*8) + 1;
     rank = random1;
     let files = 'abcdefgh';
     file = files[random2-1];
     target = file + String(rank)
-    console.log('target:'+target);
     $('#prompt').html(target);
     $('#prompt2').html(target);
     $('#prompt2').css('background-color','black');
     $('#prompt').stop(true,true).show().fadeOut(1500);
 }
 
-prompt();
 
 
 //handler for user clicking on a square
 $(".square").click(function(){
     let square = $(this).attr('id');
-    console.log('clicked:'+ square);
     if(square == target){
         prompt()
     }
@@ -113,4 +120,18 @@ $(".square").click(function(){
     }
 });
 
+var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+var position_fen= "4R3/8/8/2Pkp3/N7/4rnKB/1nb5/b1r5";
+var random = true;
+
+var positions = []
+//load positions
+
+
+
+$.get("/resources/positions.txt",function(data){
+	positions = data.split("\n");
+	parse_fen(position_fen);
+	prompt(starting_fen);
+});
 
