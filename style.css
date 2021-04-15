@@ -41,6 +41,7 @@ body{
     color: white;
     text-shadow: 5px 5px black;
     display:none;
+    pointer-events:none;
 }
 
 #prompt2{
@@ -74,6 +75,15 @@ body{
     bottom: -7vh;
 }
 
+.wrong_square{
+    background-color: rgb(255, 99, 99) !important;
+}
+
+.correct_square{
+    background-color: lightgreen !important;
+}
+
+
 button{
     background-color: rgb(226, 226, 226);
 }
@@ -82,9 +92,6 @@ button{
     color:darkgrey;
 }
 
-.bad{
-    color: red !important;
-}
 
 .perspective_button{
     font-size: 2.5vh;
@@ -191,6 +198,7 @@ table{
 
 .square{
     position: relative;
+    transition-duration: 0s;
 }
 
 #curtain{

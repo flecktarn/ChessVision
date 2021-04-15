@@ -220,10 +220,16 @@ function prompt(){
 $(".square").click(function(){
     let square = $(this).attr('id');
     if(square == target){
+		$(this).addClass('correct_square');
+		$(this).css('transition-duration','1s');
+		$(this).removeClass('correct_square');
         prompt()
+		$('.wrong_square').each(function(){
+			$(this).removeClass('wrong_square');
+		});
     }
     else{
-        $('#prompt2').addClass('bad');
+        $(this).addClass('wrong_square');
     }
 });
 
