@@ -95,7 +95,7 @@ button{
 
 
 .perspective_button{
-    box-shadow: 0px 2px 5px rgb(148, 148, 148);
+    box-shadow: 2px 2px 0px rgb(148, 148, 148);
     font-size: 2.5vh;
     font-weight: bold;
     border: 7px solid transparent;
@@ -117,7 +117,7 @@ button{
 }
 
 .row_button{
-    box-shadow: 0px 2px 5px rgb(148, 148, 148);
+    box-shadow: 3px 3px 0px rgb(148, 148, 148);
     display:block;
     font-size: 20px;;
     padding: 30px;
@@ -147,12 +147,14 @@ button{
     padding:0;
     background-color:rgb(46, 46, 46);
     color: white;
-    box-shadow: 0px 2px 5px rgb(148, 148, 148);
+    box-shadow: 3px 3px 0px rgb(175, 175, 175);
 }
 
 
 .selected{
     border: 7px solid rgb(61, 173, 224);
+    box-shadow: none;
+    box-shadow: 3px 3px 0px rgb(42, 118, 153);
 }
 .selected:focus{
     border: 7px solid rgb(61, 173, 224);
