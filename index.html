@@ -18,6 +18,36 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div id = "board"></div>
+        <div id = "curtain">
+        </div>
+
+        <div id = "menu">
+            <div id = "container">
+                <br/>
+                <h1>Settings</h1>
+                <h3>Perspective</h3>
+                <button class = 'perspective_button selected' id='white_perspective_button'>
+                    <img src = 'images/Chess_klt45.svg'/>
+                </button>
+                <button class = 'perspective_button' id='black_perspective_button'>
+                    <img src = 'images/Chess_kdt45.svg'/>
+                </button>
+                <br/>
+                <br/>
+                <h3>Pieces</h3>
+                <button class = 'row_button' id='no_pieces_button'>
+                    None
+                </button>
+                <button class = 'row_button' id='starting_pieces_button'>
+                    Starting Position
+                </button>
+                <button class = 'row_button' id='random_pieces_button'>
+                   Random 
+                </button>
+                <br/>
+                <button id = "close_button">Close</button>
+            </div>
+        </div>
         
         <script src="./script.js" async defer></script>
     </body>

@@ -5,10 +5,16 @@ var target = 'a1';
 var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 var blank_fen = "///////";
 var current_fen = "";
-var random = true;
+var piece_setting = 'starting';
 
 var positions = []
 //load positions
+
+$('#close_button').click(function(){
+	$('#menu').hide();
+	$('#curtain').hide();
+});
+
 
 function create_board(){
 	$("#board").html("");
@@ -37,27 +43,53 @@ function create_board(){
 	$("#board").html(chessboard);
 	$("#board").append("<div id='prompt'></div>");
 	$("#board").append("<div id='prompt2'></div>");
-	$("#board").append(
-		"\
-			<button class = 'perspective_button' id='white_perspective_button'>\
-				White\
-			</button>\
-			<button class = 'perspective_button' id='black_perspective_button'>\
-				Black\
-			</button>\
-		"
-		);
+	$("#board").append("<button id='menu_button'>menu</button>");
 
 	$('#white_perspective_button').click(function(){
 		change_perspective('white');
+		$(this).addClass('selected');
+		$('#black_perspective_button').removeClass('selected');
 	})
 	$('#black_perspective_button').click(function(){
 		change_perspective('black');
+		$(this).addClass('selected');
+		$('#white_perspective_button').removeClass('selected');
 	})
+
+$('#menu_button').click(function(){
+	$('#menu').show();
+	$('#curtain').show();
+});
 	draw_rank_and_file_labels();
 	change_perspective("white");
 }
 
+$('#no_pieces_button').click(function(){
+	piece_setting = 'none';
+	$('.row_button').each(function(){
+		$(this).removeClass('selected');
+	});
+	$(this).addClass('selected');
+	parse_fen(blank_fen);
+})
+
+$('#starting_pieces_button').click(function(){
+	piece_setting = 'starting';
+	$('.row_button').each(function(){
+		$(this).removeClass('selected');
+	});
+	$(this).addClass('selected');
+	parse_fen(starting_fen);
+})
+
+$('#random_pieces_button').click(function(){
+	piece_setting = 'random';
+	$('.row_button').each(function(){
+		$(this).removeClass('selected');
+	});
+	$(this).addClass('selected');
+ 	draw_random();
+})
 
 function change_perspective(color){
 	let files = 'abcdefgh';
@@ -154,13 +186,20 @@ function clear_board(){
 $('img').on('dragstart', function(event) { event.preventDefault(); });
 $('img').on('contextmenu', function(event) { event.preventDefault(); });
 
-
-//prompt the player with a new square to find
-function prompt(){
-	if (random){
+function draw_random(){
 		let index = Math.floor(Math.random() * positions.length);
 		position = positions[index];
 		parse_fen(position);
+}
+
+//prompt the player with a new square to find
+function prompt(){
+	if (piece_setting == 'random'){
+		draw_random();
+	}
+
+	else if(piece_setting == 'starting'){
+		parse_fen(starting_fen);
 	}
 
     let random1 = Math.floor(Math.random()*8) + 1;
