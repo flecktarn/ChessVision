@@ -58,10 +58,12 @@ body{
 
 .dark{
     background-color: #8da2ac;
+    color: #dee3e6;
 }
 
 .light{
     background-color: #dee3e6;
+    color: #8da2ac;
 }
 
 table{
@@ -71,4 +73,24 @@ table{
     height: 100%;
 }
 
+
+.rank, .file{
+    font-weight: bold;
+    position:absolute;
+    font-size: 2vh;
+}
+
+.rank{
+    top: 0.5vh;
+    right: 0.5vh;
+}
+
+.file{
+    bottom: 0.5vh;
+    left: 0.5vh;
+}
+
+.square{
+    position: relative;
+}
 

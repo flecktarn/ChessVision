@@ -3,6 +3,7 @@ var active_square = '';
 var target = 'a1';
 
 function create_board(){
+	$("#board").html("");
 	let files = 'abcdefgh';
 	//create board elements
 	for (let i=0; i<64; i++){
@@ -28,16 +29,24 @@ function create_board(){
 	$("#board").html(chessboard);
 	$("#board").append("<div id='prompt'></div>");
 	$("#board").append("<div id='prompt2'></div>");
+	$(".square").slice(-8).each(function(){
+		let file = $(this).attr('id')[0];
+		$(this).append(`<div class = 'file'>${file}</div>`);
+	});
+	$(".square:nth-child(8n)").each(function(){
+		let rank = $(this).attr('id')[1];
+		$(this).append(`<div class = 'rank'>${rank}</div>`);
+	});
 }
 
 create_board();
 
 function draw (piece,square){
-    $(`#${square}`).html(`<img src='./images/Chess_${piece}t45.svg'/>`)
+    $(`#${square}`).append(`<img src='./images/Chess_${piece}t45.svg'/>`)
 }
 
 function clear(square){
-    $(`#${square}`).html('')
+    $(`#${square} img`).remove()
 }
 
 
@@ -79,7 +88,7 @@ function parse_fen(fen){
 //empty the board of all pieces
 function clear_board(){
 	$(".square").each(function(){
-		$(this).html("");
+		$(this).find("img").remove();
 	});
 }
 //disable context menu and dragging
@@ -122,7 +131,7 @@ $(".square").click(function(){
 
 var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 var blank_fen = "///////";
-var random = false;
+var random = true;
 
 var positions = []
 //load positions
