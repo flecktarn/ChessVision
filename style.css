@@ -74,6 +74,10 @@ body{
     bottom: -7vh;
 }
 
+button{
+    background-color: rgb(226, 226, 226);
+}
+
 #menu_button:hover{
     color:darkgrey;
 }
