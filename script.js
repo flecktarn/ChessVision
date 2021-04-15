@@ -2,6 +2,14 @@ var chessboard= "";
 var active_square = '';
 var target = 'a1';
 
+var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+var blank_fen = "///////";
+var current_fen = "";
+var random = true;
+
+var positions = []
+//load positions
+
 function create_board(){
 	$("#board").html("");
 	let files = 'abcdefgh';
@@ -29,12 +37,58 @@ function create_board(){
 	$("#board").html(chessboard);
 	$("#board").append("<div id='prompt'></div>");
 	$("#board").append("<div id='prompt2'></div>");
+	$("#board").append(
+		"\
+			<button class = 'perspective_button' id='white_perspective_button'>\
+				White\
+			</button>\
+			<button class = 'perspective_button' id='black_perspective_button'>\
+				Black\
+			</button>\
+		"
+		);
+
+	$('#white_perspective_button').click(function(){
+		change_perspective('white');
+	})
+
+	$('#black_perspective_button').click(function(){
+		change_perspective('black');
+	})
+	draw_rank_and_file_labels();
+	change_perspective("white");
+}
+
+
+function change_perspective(color){
+	let files = 'abcdefgh';
+	if (color == "white"){
+		$('.square').each(function(index){
+			let file = files[index % 8];
+			let rank = (8-Math.floor(index/8));
+			$(this).attr('id',`${file}${rank}`);
+		});
+	}
+	else if(color == "black"){
+		$('.square').each(function(index){
+			let file = files[7 - (index % 8)];
+			let rank = Math.floor(index/8)+1;
+			$(this).attr('id',`${file}${rank}`);
+		});
+	}
+	draw_rank_and_file_labels();
+	parse_fen(current_fen);
+}
+
+function draw_rank_and_file_labels(){
 	$(".square").slice(-8).each(function(){
 		let file = $(this).attr('id')[0];
+		$(this).find('.file').remove();
 		$(this).append(`<div class = 'file'>${file}</div>`);
 	});
 	$(".square:nth-child(8n)").each(function(){
 		let rank = $(this).attr('id')[1];
+		$(this).find('.rank').remove();
 		$(this).append(`<div class = 'rank'>${rank}</div>`);
 	});
 }
@@ -52,6 +106,7 @@ function clear(square){
 
 
 function parse_fen(fen){
+	current_fen = fen;
 	clear_board();
 	rank = 8;
 	file = 1;
@@ -129,16 +184,9 @@ $(".square").click(function(){
     }
 });
 
-var starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-var blank_fen = "///////";
-var random = true;
-
-var positions = []
-//load positions
 
 
 
-parse_fen(starting_fen);
 
 
 $.get("/resources/positions.txt",function(data){
