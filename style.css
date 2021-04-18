@@ -44,6 +44,7 @@ body{
     pointer-events:none;
 }
 
+
 #prompt2{
     margin-top: 2vh;
     padding: 1vh;
@@ -85,8 +86,8 @@ body{
 
 
 button{
-    background-color: rgb(226, 226, 226);
-    box-sizing: content-box;
+    background-color: rgb(240, 240, 240);
+    box-sizing: border-box;
 }
 
 #menu_button:hover{
@@ -95,10 +96,9 @@ button{
 
 
 .perspective_button{
-    box-shadow: 2px 2px 0px rgb(148, 148, 148);
     font-size: 2.5vh;
     font-weight: bold;
-    border: 7px solid transparent;
+    border: 2px solid transparent;
     border-radius: 10px;
     height: 100px;
     width: 100px;
@@ -116,13 +116,12 @@ button{
 }
 
 .row_button{
-    box-shadow: 3px 3px 0px rgb(148, 148, 148);
     display:block;
     font-size: 20px;;
     padding: 30px;
     margin: auto;
     font-weight: bold;
-    border: 7px solid transparent;
+    border: 3px solid transparent;
     border-radius: 10px;
     height: 50px;
     width: 300px;
@@ -136,7 +135,7 @@ button{
     padding: 30px;
     margin: auto;
     font-weight: bold;
-    border: 7px solid transparent;
+    border: 3px solid transparent;
     transition-duration: 0.2s;
     border-radius: 10px;
     height: 50px;
@@ -145,17 +144,15 @@ button{
     padding:0;
     background-color:rgb(46, 46, 46);
     color: white;
-    box-shadow: 3px 3px 0px rgb(175, 175, 175);
 }
 
 
 .selected{
-    border: 7px solid rgb(61, 173, 224);
+    border: 3px solid rgb(56, 136, 189);
+    background-color: white;
     box-shadow: none;
-    box-shadow: 3px 3px 0px rgb(42, 118, 153);
 }
 .selected:focus{
-    border: 7px solid rgb(61, 173, 224);
     outline:none;
 }
 button:focus{
