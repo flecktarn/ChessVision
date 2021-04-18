@@ -214,7 +214,17 @@ function prompt(){
     $('#prompt').stop(true,true).show().fadeOut(1500);
 }
 
-
+//handles coordinates option
+$('#coords_on').click(function(){
+	$('#coords_off').removeClass('active');
+	$(this).addClass('active');
+	$('.rank, .file').show();
+});
+$('#coords_off').click(function(){
+	$('#coords_on').removeClass('active');
+	$(this).addClass('active');
+	$('.rank, .file').hide();
+});
 
 //handler for user clicking on a square
 $(".square").click(function(){
