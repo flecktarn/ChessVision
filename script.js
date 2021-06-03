@@ -129,7 +129,6 @@ function draw_rank_and_file_labels(){
 	});
 }
 
-create_board();
 
 function draw (piece,square){
     $(`#${square}`).append(`<img src='./images/Chess_${piece}t45.svg'/>`)
@@ -251,3 +250,6 @@ $.get("/resources/positions.txt",function(data){
 	prompt();
 });
 
+
+create_board();
+$('#menu').show();
